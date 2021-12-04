@@ -1,6 +1,8 @@
 package db.test;
 import java.sql.*;
-public class Insert_Java {
+import java.util.List;
+import java.util.ArrayList;
+public class DbMain {
   public static void main(String[] args) {
     boolean flag=false;
     Connection conn=null;
@@ -9,17 +11,36 @@ public class Insert_Java {
     } catch(ClassNotFoundException e) {.printStackTrace(); }
     PreparedStatement pstmt=null;
     try{
-      conn=DriverManage.getConnection("jdbc:postgresql://localhost:5432/mydb","studx","gkrod123A!");
-      String sql="INSERT INTO badge (stud_id,stud_passwd,stud_name,stud_maile,stud_gender) VALUES
-        (?,?,?,?,?)";
-        pstmt = conn.prepareStatement(sql);
-      pstmt.setString(1, "hdbyun"); pstmt.setString(2,"4321"); pstmt.setSting(3,"변학도");
-      pstmt.setString(4, "hdbyun@abc.com");pstmt.setString(5,"남자");
-      int cnt = pstm.executeUpdate();
-      flag=true;
-      System.out.println(flag+" "+cnt);
+      System.out.println("모두 지웁니다");
+      Mdelete mdelete = new Mdelete();
+      flag = mdelete.mdelete("all", "");
     } catch(Exception e) {e.printStackTrace();
                          } finally {
       try{ if(conn !=null)conn.close(); if(pstmt !=null) pstmt.close();
-         } catch(Exception e) {e.printStackTrace(); }
-    }}}
+         } catch(Exception e) {e.printStackTrace();
+                              }
+    }
+    try{
+      System.out.println("홍길동 입력합니다.");
+      stud_id = "kdhong";
+      stud_passwd = "1234";
+      stud_name = "홍길동";
+      stud_email = "kdhong@abc.com";
+      stud_gender = "남자";
+      Minsert minst = new Minsert();
+      flag = minst.minsert(stud_id, stud_passwd, stud_name, stud_email, stud_gender);
+      System.out.println("이몽룡 입력합니다"); //추후 수정을 위해 의도적으로 잘못 입력
+      stud_id = "mrlee";
+      stud_passwd = "4321";
+      stud_name = "변학도";
+      stud_email = "hdhyun@abc.com";
+      stud_gender = "남자";
+      flag = minst.minsert(stud_id, stud_passwd, stud_name, stud_email, stud_gender);
+    } catch(Exception e) {e.printStackTrace();
+                         } finally {
+      try{ if(conn !=null)conn.close(); if(pstmt !=null) pstmt.close();
+         } catch(Exception e) {e.printStackTrace(); 
+     }
+    }
+  }
+}
