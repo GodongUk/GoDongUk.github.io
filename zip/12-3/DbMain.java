@@ -8,8 +8,9 @@ public class DbMain {
     Connection conn=null;
     try{
       Class.forName("org.postgresql.Driver"); 
-    } catch(ClassNotFoundException e) {.printStackTrace(); }
+    } catch(ClassNotFoundException e) {e.printStackTrace(); }
     PreparedStatement pstmt=null;
+    String stud_id, stud_passwd, stud_name, stud_email, stud_gender;
     try{
       System.out.println("모두 지웁니다");
       Mdelete mdelete = new Mdelete();
