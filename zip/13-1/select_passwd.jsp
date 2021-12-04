@@ -9,5 +9,15 @@
   <body>
     <%
     Class.forName("org.postgresql.Driver");
-    Connection conn = DriverManager.getConnection("
-        
+    Connection conn=DriverManage.getConnection("jdbc:postgresql://localhost:5432/mydb","studx","gkrod123A!");
+    Statement stmt = conn.createStatement();
+    ResultSet rs=stmt.executeQuery("SELECT * FROM studuser;");
+    while(rs.next()) {
+    out.println(rs.getString("stud_id"));
+    out.println(rs.getString("stud_passwd"));
+    }
+    rs.close();
+    stmt.close();
+    conn.close();
+    %>
+  </body></html>
