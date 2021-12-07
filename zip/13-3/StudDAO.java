@@ -62,4 +62,25 @@ public class StudDAO {
   public boolean checkPwd(String stud_id, String stud_passwd_ throw SQLException{
     boolean flag = false;
     String sql ="select * from studuser where stud_id=?;
-      ;;
+       try{
+      conn = DriverManager.getConnection(url,user,pass);
+      ps = conn.prepareStatement(sql);
+      ps.setString(1,stud_id);
+      ResultSet rs = ps.executeQuery();
+      if(rs.next()){
+        if(stud_id.equals(rs.getString("stud_id").trim()) && stud_passwd.equals(rs.getString("stud_passwd").trim())
+           {
+             flag=true;
+           } else {
+             flag=false;
+           }
+           }
+    } finally {
+      if(ps!=null)
+        ps.close();
+      if(conn != null)
+        conn.close();
+    }
+    return flag;
+           }
+           }
